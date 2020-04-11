@@ -15,7 +15,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@my-organigation/shared": ["libs/shared/src/index.ts"],
+      "@my-organigation/navigation": ["libs/navigation/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -28,6 +28,12 @@
     },
     "activity-api": {
       "tags": []
+    },
+    "shared": {
+      "tags": []
+    },
+    "navigation": {
+      "tags": []
     }
   }
 }
