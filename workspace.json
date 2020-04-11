@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "projects": {
+    "activity-app": {
+      "root": "apps/activity-app",
+      "sourceRoot": "apps/activity-app/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "outputPath": "dist/apps/activity-app",
+            "index": "apps/activity-app/src/index.html",
+            "main": "apps/activity-app/src/main.tsx",
+            "polyfills": "apps/activity-app/src/polyfills.ts",
+            "tsConfig": "apps/activity-app/tsconfig.app.json",
+            "assets": [
+              "apps/activity-app/src/favicon.ico",
+              "apps/activity-app/src/assets"
+            ],
+            "styles": ["apps/activity-app/src/styles.css"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/activity-app/src/environments/environment.ts",
+                  "with": "apps/activity-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "activity-app:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "activity-app:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/activity-app/.eslintrc",
+            "tsConfig": [
+              "apps/activity-app/tsconfig.app.json",
+              "apps/activity-app/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/activity-app/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/activity-app/jest.config.js",
+            "tsConfig": "apps/activity-app/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "activity-app-e2e": {
+      "root": "apps/activity-app-e2e",
+      "sourceRoot": "apps/activity-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/activity-app-e2e/cypress.json",
+            "tsConfig": "apps/activity-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "activity-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "activity-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/activity-app-e2e/.eslintrc",
+            "tsConfig": ["apps/activity-app-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/activity-app-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/react": {
+      "application": {
+        "style": "css",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nx-plugin": {
+      "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "activity-app"
+}
