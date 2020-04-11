@@ -109,6 +109,63 @@
           }
         }
       }
+    },
+    "activity-api": {
+      "root": "apps/activity-api",
+      "sourceRoot": "apps/activity-api/src",
+      "projectType": "application",
+      "prefix": "activity-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/activity-api",
+            "main": "apps/activity-api/src/main.ts",
+            "tsConfig": "apps/activity-api/tsconfig.app.json",
+            "assets": ["apps/activity-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/activity-api/src/environments/environment.ts",
+                  "with": "apps/activity-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "activity-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/activity-api/.eslintrc",
+            "tsConfig": [
+              "apps/activity-api/tsconfig.app.json",
+              "apps/activity-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/activity-api/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/activity-api/jest.config.js",
+            "tsConfig": "apps/activity-api/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
